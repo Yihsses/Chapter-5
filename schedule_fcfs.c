@@ -8,12 +8,8 @@
 
 static int task_id = 0;
 static struct node* head = NULL;
-static pthread_mutex_t task_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void add(char* name, int priority, int burst) {
-    // Lock the mutex to ensure thread safety
-    pthread_mutex_lock(&task_mutex);
-
     // Create a new task
     struct task* task = malloc(sizeof(struct task));
     task->name = name;
@@ -23,19 +19,12 @@ void add(char* name, int priority, int burst) {
 
     // insert the node at the end of the list
     insert(&head, task);
-
-    // Unlock the mutex after adding the task
-    pthread_mutex_unlock(&task_mutex);
 }
 
 void schedule() {
-    // Lock the mutex to ensure thread safety
-    pthread_mutex_lock(&task_mutex);
-
     // Simulate First-Come, First-Served (FCFS) scheduling
     struct node* current = head;
     while (current != NULL) {
-        
         // Simulate the task execution
         run(current->task, current->task->burst);
 
@@ -48,7 +37,4 @@ void schedule() {
         current = current->next;
         free(tmp);
     }
-
-    // Unlock the mutex after scheduling
-    pthread_mutex_unlock(&task_mutex);
 }

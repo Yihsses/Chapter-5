@@ -11,12 +11,8 @@
 static int task_id = 0;
 static struct node* head[] = {NULL, NULL, NULL, NULL, NULL,
                               NULL, NULL, NULL, NULL, NULL};
-static pthread_mutex_t task_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void add(char* name, int priority, int burst) {
-    // Lock the mutex to ensure thread safety
-    pthread_mutex_lock(&task_mutex);
-
     // Create a new task
     struct task* task = malloc(sizeof(struct task));
     task->name = name;
@@ -26,15 +22,9 @@ void add(char* name, int priority, int burst) {
 
     // insert the node at the end of the list
     insert(&head[priority - 1], task);
-
-    // Unlock the mutex after adding the task
-    pthread_mutex_unlock(&task_mutex);
 }
 
 void schedule() {
-    // Lock the mutex to ensure thread safety
-    pthread_mutex_lock(&task_mutex);
-
     // Implement Priority RR scheduling
     // Start from MAX_PRIORITY and work down to MIN_PRIORITY
     for (int priority = MAX_PRIORITY; priority >= MIN_PRIORITY; priority--) {
@@ -44,8 +34,7 @@ void schedule() {
             struct task* task = current->task;
 
             // Execute the task for one time quantum or until completion
-            int slice =
-                (task->burst < TIME_QUANTUM) ? task->burst : TIME_QUANTUM;
+            int slice = (task->burst < TIME_QUANTUM) ? task->burst : TIME_QUANTUM;
             run(task, slice);
             task->burst -= slice;
 
@@ -61,7 +50,4 @@ void schedule() {
             }
         }
     }
-
-    // Unlock the mutex after scheduling
-    pthread_mutex_unlock(&task_mutex);
 }
