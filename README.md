@@ -17,3 +17,6 @@
 ```bash
 make fcfs
 ./fcfs input.txt
+```
+
+
