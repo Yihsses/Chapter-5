@@ -1,6 +1,5 @@
 # documentation 
 
-這個專案將會實現多個排程演算法，並包含以下 C 檔案：
 schedule_fcfs.c - 實現 FCFS 排程演算法。
 
 schedule_sjf.c - 實現 SJF 排程演算法。
@@ -11,12 +10,17 @@ schedule_priority.c - 實現優先權排程演算法。
 
 schedule_priority_rr.c - 實現優先權 RR 排程演算法。
 
-## Requirements
+使用 make 工具來編譯並生成執行檔
 
-Here you should give a general idea of what a user will need in order to use your library or application. List requirements and then link to another resource with detailed installation or setup instructions.
+make fcfs 生成 fcfs 執行檔
 
-- Requirement one
-- Another requirement
+make sjf 生成 sjf 執行檔
+
+make rr 生成 rr 執行檔
+
+make priority 生成 priority 執行檔
+
+make priority_rr 生成 priority_rr 執行檔
 
 Check the [installation notes]() for more details on how to install the project.
 
