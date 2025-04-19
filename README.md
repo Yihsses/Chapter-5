@@ -1,15 +1,4 @@
 # documentation 
-
-schedule_fcfs.c - 實現 FCFS 排程演算法。
-
-schedule_sjf.c - 實現 SJF 排程演算法。
-
-schedule_rr.c - 實現 RR 排程演算法。
-
-schedule_priority.c - 實現優先權排程演算法。
-
-schedule_priority_rr.c - 實現優先權 RR 排程演算法。
-
 使用 make 工具來編譯並生成執行檔
 
 make fcfs 生成 fcfs 執行檔
